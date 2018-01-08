@@ -135,6 +135,16 @@ func (c *client) IsConnected() bool {
 	}
 }
 
+// HasConnection returns a bool signifying whether
+// the client is connected or not regardless of whether
+// AutoReconnect is set.
+func (c *client) HasConnection() bool {
+  c.RLock()
+  defer c.RUnlock()
+  status := atomic.LoadUint32(&c.status)
+  return status == connected
+}
+
 func (c *client) connectionStatus() uint32 {
 	c.RLock()
 	defer c.RUnlock()
