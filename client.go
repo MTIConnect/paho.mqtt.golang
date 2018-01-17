@@ -53,6 +53,7 @@ const (
 // and then supplying a ClientOptions type.
 type Client interface {
 	IsConnected() bool
+	HasConnection() bool
 	Connect() Token
 	Disconnect(quiesce uint)
 	Publish(topic string, qos byte, retained bool, payload interface{}) Token
